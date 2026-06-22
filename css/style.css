@@ -116,39 +116,52 @@ a:focus-visible {
 .category-tabs {
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;
+  align-items: center;
   width: 100%;
   margin: 0 0 28px;
-  border: 1px solid #263752;
+  padding: 8px 18px;
+  border: 2px solid #9d9d9d;
+  border-radius: 10px;
   background: #fff;
-  font-size: .92rem;
-  line-height: 1.4;
+  color: #000;
+  font-size: clamp(.98rem, 2.2vw, 1.12rem);
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .category-tabs .category-label {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 12px;
-  background: var(--main-navy);
-  color: #fff;
-  font-weight: 850;
+  display: inline;
+  margin-right: .35em;
+  padding: 0;
+  background: transparent;
+  color: #000;
+  font-weight: 500;
   white-space: nowrap;
 }
 
 .category-tabs a {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 12px;
-  border-left: 1px solid var(--line-soft);
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--link);
-  font-weight: 800;
+  font-weight: 850;
   text-decoration: none;
   white-space: nowrap;
 }
 
+.category-tabs a + a::before {
+  content: "|";
+  display: inline-block;
+  margin: 0 .7em;
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+}
+
 .category-tabs a:hover,
 .category-tabs a:focus-visible {
-  background: #f3f5f8;
+  background: transparent;
   text-decoration: underline;
 }
 
@@ -358,19 +371,23 @@ a:focus-visible {
 }
 
 .emblem-cell {
-  min-height: 132px;
+  min-height: 178px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px 12px;
+  padding: 14px 10px;
+  overflow: hidden;
   background: #fff;
 }
 
 .emblem-cell img {
   display: block;
-  width: min(160px, 54%);
-  max-height: 150px;
+  width: min(260px, 78%);
+  max-height: 240px;
   object-fit: contain;
+  clip-path: inset(16% 18% 17% 18%);
+  transform: scale(1.42);
+  transform-origin: center;
 }
 
 .color-row {
@@ -704,41 +721,46 @@ table:not(.info-table) td:first-child {
 .history-merged-list,
 .operation-merged-list,
 .facility-merged-list {
-  display: grid;
-  gap: 10px;
-  margin: 14px 0 22px;
+  display: block;
+  margin: 14px 0 26px;
   padding-left: 0;
   list-style: none;
 }
 
 .merged-section-item,
 .facility-item {
-  margin: 0;
-  padding: 11px 14px 11px 18px;
-  border-left: 3px solid #e2e6ee;
-  background: #fafafa;
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  scroll-margin-top: 18px;
 }
 
-.facility-item {
-  border: 1px solid #dce2ea;
-  border-left: 4px solid var(--main-navy);
-  background: #f3f5f8;
+.merged-section-item:last-child,
+.facility-item:last-child {
+  margin-bottom: 0;
 }
 
 .merged-title {
   display: block;
-  margin-bottom: 4px;
+  margin: 0 0 7px;
   color: #000;
+  font-size: 1.02rem;
   font-weight: 850;
+  line-height: 1.45;
+}
+
+.merged-content {
+  color: #000;
+  font-weight: 400;
+}
+
+.merged-content p {
+  margin: 0 0 1.05em;
 }
 
 .merged-content p:last-child {
   margin-bottom: 0;
-}
-
-.merged-section-item,
-.facility-item {
-  scroll-margin-top: 18px;
 }
 
 .image-placeholder,
@@ -1062,6 +1084,17 @@ table:not(.info-table) td:first-child {
     font-size: .98rem;
   }
 
+  .category-tabs {
+    margin-bottom: 24px;
+    padding: 7px 12px;
+    border-radius: 9px;
+    font-size: .96rem;
+  }
+
+  .category-tabs a + a::before {
+    margin: 0 .55em;
+  }
+
   .top-grid {
     margin-top: 26px;
     padding-top: 24px;
@@ -1102,13 +1135,17 @@ table:not(.info-table) td:first-child {
   }
 
   .emblem-cell {
-    min-height: 220px;
-    padding: 20px 10px;
+    min-height: 300px;
+    padding: 12px 8px;
+    overflow: hidden;
   }
 
   .emblem-cell img {
-    width: min(260px, 78%);
-    max-height: 240px;
+    width: min(390px, 96%);
+    max-height: 360px;
+    clip-path: inset(16% 18% 17% 18%);
+    transform: scale(1.5);
+    transform-origin: center;
   }
 
   .section-fold {
@@ -1173,12 +1210,13 @@ table:not(.info-table) td:first-child {
   }
 
   .emblem-cell {
-    min-height: 200px;
+    min-height: 270px;
   }
 
   .emblem-cell img {
-    width: min(240px, 82%);
-    max-height: 220px;
+    width: min(360px, 98%);
+    max-height: 330px;
+    transform: scale(1.5);
   }
 
   .swatch {
