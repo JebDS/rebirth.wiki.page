@@ -120,7 +120,7 @@ a:focus-visible {
   width: 100%;
   margin: 0 0 28px;
   padding: 8px 18px;
-  border: 2px solid #9d9d9d;
+  border: 1px solid var(--line);
   border-radius: 10px;
   background: #fff;
   color: #000;
@@ -253,7 +253,7 @@ a:focus-visible {
 
 .toc .lv1 {
   padding-left: 0;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .toc .lv2 {
@@ -569,7 +569,8 @@ h3.subsection-toggle:focus-visible,
 h4.subsection-toggle:focus-visible,
 .toc-toggle:focus-visible,
 .category-tabs a:focus-visible,
-.nested-fold > summary:focus-visible,
+.minor-fold > summary:focus-visible,
+.section-fold > summary:focus-visible,
 .qbtn:focus-visible {
   outline: 2px solid var(--link);
   outline-offset: 3px;
@@ -595,6 +596,11 @@ strong {
 .strike-text,
 .strike-ghost {
   text-decoration: line-through;
+}
+
+.strike-text {
+  color: #777;
+  text-decoration-color: #777;
 }
 
 .strike-ghost {
@@ -656,35 +662,25 @@ table:not(.info-table) td:first-child {
   font-weight: 800;
 }
 
-.nested-fold {
-  margin: 14px 0 4px;
-  border: 1px solid #dce2ea;
-  background: #fff;
+.operation-detail-fold {
+  margin: 16px 0 0;
 }
 
-.nested-fold > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 9px 12px;
-  border-bottom: 1px solid transparent;
-  background: #f3f5f8;
-  color: var(--main-navy);
-  font-weight: 850;
+.operation-detail-fold .content-list {
+  margin-top: 16px;
 }
 
-.nested-fold[open] > summary {
-  border-bottom-color: #dce2ea;
+.js-details-ready > .section-body,
+.js-details-ready > .details-animate-content {
+  overflow: hidden;
+  transition: max-height .32s ease, opacity .24s ease;
+  will-change: max-height, opacity;
 }
 
-.nested-fold > summary strong {
-  flex: 0 0 auto;
-}
-
-.nested-fold .content-list {
-  margin: 0;
-  padding: 10px 14px 14px;
+.js-details-ready:not([open]) > .section-body,
+.js-details-ready:not([open]) > .details-animate-content {
+  max-height: 0;
+  opacity: 0;
 }
 
 .floor-list,
@@ -818,9 +814,11 @@ table:not(.info-table) td:first-child {
   display: none;
 }
 
-.footnotes ol {
+.footnotes ol,
+.footnotes ul {
   margin: 0;
-  padding-left: 1.4em;
+  padding-left: 0;
+  list-style: none;
 }
 
 .footnotes li {
@@ -1032,6 +1030,14 @@ table:not(.info-table) td:first-child {
   background: var(--accent);
   color: #fff;
   text-decoration-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-details-ready > .section-body,
+  .js-details-ready > .details-animate-content,
+  .toc > ol {
+    transition: none;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 761px) {

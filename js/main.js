@@ -46,6 +46,125 @@
     });
   }
 
+  function getDetailsContent(details) {
+    const summary = $(':scope > summary', details);
+    if (!summary) return null;
+
+    const prepared = $(':scope > .section-body, :scope > .details-animate-content', details);
+    if (prepared) return prepared;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'details-animate-content';
+
+    let node = summary.nextSibling;
+    while (node) {
+      const next = node.nextSibling;
+      wrapper.appendChild(node);
+      node = next;
+    }
+
+    details.appendChild(wrapper);
+    return wrapper;
+  }
+
+  function finishDetailsAnimation(details, content, open) {
+    details.classList.remove('is-animating');
+
+    if (open) {
+      content.style.maxHeight = 'none';
+      content.style.opacity = '1';
+      return;
+    }
+
+    details.open = false;
+    content.style.maxHeight = '0px';
+    content.style.opacity = '0';
+  }
+
+  function animateDetailsOpen(details, content) {
+    details.open = true;
+    details.classList.add('is-animating');
+    content.style.maxHeight = '0px';
+    content.style.opacity = '0';
+
+    requestAnimationFrame(() => {
+      content.style.maxHeight = `${content.scrollHeight}px`;
+      content.style.opacity = '1';
+    });
+
+    const end = (event) => {
+      if (event.propertyName !== 'max-height') return;
+      content.removeEventListener('transitionend', end);
+      finishDetailsAnimation(details, content, true);
+    };
+
+    content.addEventListener('transitionend', end);
+    window.setTimeout(() => finishDetailsAnimation(details, content, true), 420);
+  }
+
+  function animateDetailsClose(details, content) {
+    details.classList.add('is-animating');
+    content.style.maxHeight = `${content.scrollHeight}px`;
+    content.style.opacity = '1';
+
+    requestAnimationFrame(() => {
+      content.style.maxHeight = '0px';
+      content.style.opacity = '0';
+    });
+
+    const end = (event) => {
+      if (event.propertyName !== 'max-height') return;
+      content.removeEventListener('transitionend', end);
+      finishDetailsAnimation(details, content, false);
+    };
+
+    content.addEventListener('transitionend', end);
+    window.setTimeout(() => finishDetailsAnimation(details, content, false), 420);
+  }
+
+  function setDetailsOpenInstant(details) {
+    const content = getDetailsContent(details);
+    details.open = true;
+
+    if (!content) return;
+    content.style.maxHeight = 'none';
+    content.style.opacity = '1';
+  }
+
+  function initDetailsAnimation() {
+    $$('details').forEach((details) => {
+      if (details.dataset.detailsAnimated === 'true') return;
+
+      const summary = $(':scope > summary', details);
+      const content = getDetailsContent(details);
+      if (!summary || !content) return;
+
+      details.dataset.detailsAnimated = 'true';
+      details.classList.add('js-details-ready');
+
+      if (details.open) {
+        content.style.maxHeight = 'none';
+        content.style.opacity = '1';
+      } else {
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+      }
+
+      summary.addEventListener('click', (event) => {
+        if (event.target.closest('a')) return;
+
+        event.preventDefault();
+        if (details.classList.contains('is-animating')) return;
+
+        if (details.open) {
+          animateDetailsClose(details, content);
+        } else {
+          animateDetailsOpen(details, content);
+        }
+      });
+    });
+  }
+
   function initHeadingToggles() {
     $$('h3.subsection-toggle, h4.subsection-toggle').forEach((heading) => {
       heading.addEventListener('click', () => toggleHeading(heading));
@@ -231,6 +350,7 @@
   }
 
   function init() {
+    initDetailsAnimation();
     initHeadingToggles();
     initTocToggle();
     initQuickNav();
