@@ -87,20 +87,17 @@ a:focus-visible {
 }
 
 .notice {
+  margin: 28px 0 32px;
+  padding: 22px 18px 24px;
   border: 1px solid #9f9f9f;
   border-top: 4px solid var(--main-navy);
   border-radius: 0;
   background: #fbfbfb;
   color: #000;
-  text-align: center;
-  box-shadow: none;
-}
-
-.notice {
-  margin: 28px 0 32px;
-  padding: 22px 18px 24px;
   font-size: 1.08rem;
   line-height: 1.58;
+  text-align: center;
+  box-shadow: none;
 }
 
 .notice strong {
@@ -170,12 +167,11 @@ a:focus-visible {
   justify-content: space-between;
   align-items: start;
   gap: 46px;
-  margin: 38px 0 0;
+  margin: 38px 0 10px;
   padding-top: 28px;
   padding-bottom: 34px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  margin-bottom: 10px;
 }
 
 .toc,
@@ -483,6 +479,7 @@ main {
   list-style: none;
   cursor: pointer;
 }
+
 .section-fold > summary::-webkit-details-marker,
 .minor-fold > summary::-webkit-details-marker {
   display: none;
@@ -835,7 +832,7 @@ table:not(.info-table) td:first-child {
 
 .footnotes {
   clear: both;
-  margin: 0px 0 0;
+  margin: 0 0 0;
   padding-top: 18px;
   border-top: 0;
   font-size: .9rem;
@@ -1187,21 +1184,6 @@ table:not(.info-table) td:first-child {
     clip-path: inset(16% 18% 17% 18%);
     transform: scale(1.5);
     transform-origin: center;
-  }
-
-  .section-fold {
-    margin-top: 56px;
-    padding-bottom: 28px;
-  }
-
-  .section-fold + .section-fold {
-    margin-top: 64px;
-  }
-
-  .section-fold > summary {
-    margin-bottom: 12px;
-    padding-bottom: 0;
-    border-bottom: 0;
   }
 
   .summary-title {
