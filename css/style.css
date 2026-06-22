@@ -169,11 +169,12 @@ a:focus-visible {
   grid-template-columns: max-content 455px;
   justify-content: space-between;
   align-items: start;
-  gap: 18px;
-  width: 100%;
-  margin: 34px 0 52px;
-  padding-top: 30px;
+  gap: 46px;
+  margin: 38px 0 0;
+  padding-top: 28px;
+  padding-bottom: 34px;
   border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .toc,
@@ -459,7 +460,7 @@ main {
 }
 
 .section-fold {
-  margin: 78px 0 0;
+  margin: 16px 0 0;
   padding-bottom: 34px;
   border-bottom: 1px solid var(--line);
 }
@@ -475,7 +476,7 @@ main {
 .section-fold > summary {
   display: flex;
   align-items: center;
-  margin: 0 0 34px;
+  margin: 0 0 17px;
   padding: 0;
   border-bottom: 0;
   list-style: none;
@@ -832,9 +833,10 @@ table:not(.info-table) td:first-child {
 }
 
 .footnotes {
-  margin-top: 36px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
+  clear: both;
+  margin: 60px 0 0;
+  padding-top: 18px;
+  border-top: 0;
   font-size: .9rem;
 }
 
@@ -1196,7 +1198,7 @@ table:not(.info-table) td:first-child {
   }
 
   .section-fold > summary {
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     padding-bottom: 0;
     border-bottom: 0;
   }
