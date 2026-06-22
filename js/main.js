@@ -131,8 +131,8 @@
     content.style.opacity = '1';
   }
 
-  function initDetailsAnimation() {
-    $$('details').forEach((details) => {
+    function initDetailsAnimation() {
+    $$('details:not(.section-fold)').forEach((details) => {
       if (details.dataset.detailsAnimated === 'true') return;
 
       const summary = $(':scope > summary', details);
